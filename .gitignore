@@ -21,7 +21,7 @@ dist/
 *.swo
 
 # Docker-specific
-*.dockerfile  # if you're experimenting with multiple
+#.dockerfile  # if you're experimenting with multiple
 docker-compose.yml  # if not using
 **/.cache/
 
