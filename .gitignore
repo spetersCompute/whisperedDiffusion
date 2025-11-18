@@ -1,0 +1,54 @@
+# __pycache__ and compiled files
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+venv/
+.venv/
+env/
+*.egg-info/
+
+# Python distribution / packaging
+build/
+dist/
+*.egg
+
+# IDEs and editors
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Docker-specific
+*.dockerfile  # if you're experimenting with multiple
+docker-compose.yml  # if not using
+**/.cache/
+
+# Logs
+*.log
+logs/
+*.out
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Jupyter
+.ipynb_checkpoints/
+
+# HuggingFace models
+# (optional, only if you're caching locally for speed)
+models/
+hf_cache/
+
+# Audio/video/output
+output/
+*.wav
+*.mp3
+*.mp4
+*.png
+*.jpg
+
+# Python dotfiles
+.python-version  # if using pyenv but want to keep machines flexible
