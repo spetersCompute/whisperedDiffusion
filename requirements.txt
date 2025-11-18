@@ -1,0 +1,6 @@
+whisper
+diffusers[torch]
+transformers
+torch
+faster-whisper
+soundfile
