@@ -1,24 +1,30 @@
-# Whispered Diffusion CPU Dockerfile
-# Uses Python 3.12 slim instead of Ubuntu
+# Whispered Diffusion — NVIDIA GPU Dockerfile
+# CUDA 12.8.1 (last version supporting Pascal)
+# Ubuntu 24.04 base + cuDNN for max performance
 
-FROM python:3.12-slim
+FROM nvidia/cuda:12.8.1-cudnn-devel-ubuntu24.04
 
-# System deps
+# ---- System dependencies ----
 RUN apt-get update && apt-get install -y \
+    python3 python3-pip python3-venv \
     ffmpeg git libsndfile1 \
+    && ln -s /usr/bin/python3 /usr/bin/python \
+    && ln -s /usr/bin/pip3 /usr/bin/pip \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Workdir
+# ---- Working directory ----
 WORKDIR /app
 
-# Copy repo contents
+# ---- Copy project ----
+# (Assumes you build from the project root)
 COPY . /app
 
-# Install PyTorch CPU build
-RUN pip install --no-cache-dir torch==2.3.0
+# ---- Install PyTorch with CUDA 12.1+ support ----
+# PyTorch doesn't publish a "12.8" wheel, but the CUDA 12.1 wheels work fine
+RUN pip install torch==2.3.0 --index-url https://download.pytorch.org/whl/cu121
 
-# Install project requirements
+# ---- Install project dependencies ----
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Default entrypoint
+# ---- Entrypoint ----
 ENTRYPOINT ["python", "-m", "src.pipeline"]
