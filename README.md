@@ -17,27 +17,23 @@ Runs locally on **CPU** or **NVIDIA GPUs** using Podman or Docker.
 
 ## Quick Start (CPU)
 
-### Build the container:
 ```bash
 podman build -f Dockerfile.cpu -t whispered-diffusion:cpu .
-```
-
-### Run the pipeline:
-```bash
 ./run_cpu.sh input/audio.wav
 ```
 
-Generated image will appear in `output/`.
+Output will appear in: `output/`
 
 ---
 
 ## Quick Start (NVIDIA GPU)
 
 **Requires:**
-- NVIDIA drivers
-- NVIDIA container toolkit
+* Nvidia GTX 10 series, RTX 20 series and up 
+- Nvidia drivers
+- Nvidia container toolkit
 
-### Build:
+### Build the container:
 ```bash
 podman build -f Dockerfile.nvidia -t whispered-diffusion:nvidia .
 ```
