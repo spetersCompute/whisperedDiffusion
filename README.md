@@ -17,10 +17,10 @@ Runs locally on **CPU** or **NVIDIA GPUs** using Podman or Docker.
 
 ## Quick Start (CPU)
 
-~~```bash
+<del>``bash
 podman build -f Dockerfile.cpu -t whispered-diffusion:cpu .
 ./run_cpu.sh input/audio.wav
-```~~
+```</del>
 Containerization isn't working yet
 
 Output will appear in: `output/`
