@@ -17,10 +17,11 @@ Runs locally on **CPU** or **NVIDIA GPUs** using Podman or Docker.
 
 ## Quick Start (CPU)
 
-```bash
+~~```bash
 podman build -f Dockerfile.cpu -t whispered-diffusion:cpu .
 ./run_cpu.sh input/audio.wav
-```
+```~~
+Containerization isn't working yet
 
 Output will appear in: `output/`
 
@@ -81,19 +82,9 @@ Models download automatically inside the container.
 
 ---
 
-## Why This Exists
-
-Built to:
-- Demo an end-to-end local AI pipeline
-- Avoid cloud/SaaS dependency
-- Serve as a real portfolio piece
-
-**Version 1 is meant to be simple and reliable.**
-
----
-
 ## Roadmap
 
+- Containerization
 - SDXL or Flux support
 - Prompt UI
 - Live mic transcription
