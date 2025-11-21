@@ -1,106 +1,109 @@
-# WhisperedDiffusion: Audio-to-Image Pipeline (Whisper + Stable Diffusion)
+# Whispered Diffusion
 
-**Speech → Text → Image generation pipeline**  
-Powered by **Faster-Whisper** + **Stable Diffusion Turbo**.  
-Runs locally on **CPU** or **NVIDIA GPUs** using Podman or Docker.
+**Speech → Text → Image**  
+Whisper transcription + Stable Diffusion image generation  
+Runs fully **locally** using **Python** — no APIs, no cloud, no accounts.
+
+This project is built as a demonstration of an **end-to-end AI pipeline**, suitable for Upwork portfolio work.
 
 ---
 
 ## What It Does
 
-1. Takes an **audio file** as input
-2. Transcribes it to text using **Faster-Whisper**
-3. Feeds the transcript into **Stable Diffusion**
-4. Outputs an image — fully **offline**, no APIs or cloud
+1. Takes an audio file (spoken prompt)  
+2. Transcribes it using **Faster-Whisper**  
+3. Converts the transcript into an image prompt  
+4. Generates an image using **Stable Diffusion Turbo**  
+5. Saves the final output to disk
+
+Everything runs on **CPU** by default.
 
 ---
 
-## Quick Start (CPU)
+# Bare-Metal Quick Start (No Docker)
 
-<del>``bash
-podman build -f Dockerfile.cpu -t whispered-diffusion:cpu .
-./run_cpu.sh input/audio.wav
-```</del>
-Containerization isn't working yet
-
-Output will appear in: `output/`
-
----
-
-## Quick Start (NVIDIA GPU)
-
-**Requires:**
-* Nvidia GTX 10 series, RTX 20 series and up 
-- Nvidia drivers
-- Nvidia container toolkit
-
-### Build the container:
+### 1. Clone the project
 ```bash
-podman build -f Dockerfile.nvidia -t whispered-diffusion:nvidia .
+git clone https://github.com/yourname/whisperedDiffusion.git
+cd whisperedDiffusion
 ```
 
-### Run:
+### 2. Install dependencies
 ```bash
-./run_nvidia.sh input/audio.wav
+pip install -r requirements.txt
+pip install torch==2.3.0
 ```
+
+### 3. Run the pipeline
+Put an audio file into the `input/` directory, then run:
+
+```bash
+python -m src.pipeline input/yourfile.wav --out-image output.png
+```
+
+Image appears in `output/`.
 
 ---
 
-## Project Structure
+# Example Output
+
+**Input Audio → Image Prompt → Final Image**
+
+(Add samples later.)
+
+---
+
+# Project Structure
 
 ```
 whisperedDiffusion/
-├─ Dockerfile.cpu
-├─ Dockerfile.nvidia
-├─ run_cpu.sh
-├─ run_nvidia.sh
-├─ requirements.txt
 ├─ src/
+│  ├─ pipeline.py
 │  ├─ whisper_client.py
 │  ├─ diffusion_client.py
-│  └─ pipeline.py
+│
 ├─ input/
-└─ output/
+├─ output/
+├─ requirements.txt
+└─ README.md
 ```
 
 ---
 
-## Requirements
+# Tech Used
 
-- Podman **or** Docker
-- No Python needed on host
-- Optional: NVIDIA GPU + drivers
+### Whisper (via Faster-Whisper)
+- Fast, accurate transcription  
+- CPU-friendly  
 
----
-
-## Models Used
-
-- Whisper via `faster_whisper`
-- Stable Diffusion Turbo (`stabilityai/sd-turbo`)
-
-Models download automatically inside the container.
+### Stable Diffusion Turbo (`stabilityai/sd-turbo`)
+- Fast text-to-image  
+- Works without GPU
 
 ---
 
-## Roadmap
+# Why This Exists
 
-- Containerization
-- SDXL or Flux support
-- Prompt UI
-- Live mic transcription
-- Audio/video output
+This project demonstrates:
+
+✔ Building an AI pipeline from scratch  
+✔ Running speech → text → image locally  
+✔ Clean, documented code  
+✔ Reproducible environments  
+
+Perfect as an Upwork portfolio piece showcasing **real applied AI work**, not toy examples.
 
 ---
 
-## License
+# Roadmap
+
+- Intel Arc / OpenVINO acceleration  
+- NVIDIA GPU container (CUDA)  
+- Microphone live-transcription mode  
+- More advanced diffusion models (SDXL, Flux)
+
+---
+
+# License
 
 MIT
-
----
-
-## Notes
-
-This is early-stage, but it **works**.  
-Clone. Build. Run. Get an image.
-
----
