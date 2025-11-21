@@ -1,6 +1,6 @@
 import argparse
-from whisper_client import WhisperClient
-from diffusion_client import DiffusionClient
+from src.whisper_client import WhisperClient
+from src.diffusion_client import DiffusionClient
 
 def build_prompt(transcript: str, prefix: str | None) -> str:
     """
