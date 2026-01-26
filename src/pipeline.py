@@ -2,6 +2,7 @@ import argparse
 from src.whisper_client import WhisperClient
 from src.diffusion_client import DiffusionClient
 
+
 def build_prompt(transcript: str, prefix: str | None) -> str:
     """
     Take the raw transcript and optionally prepend a style prefix
@@ -11,6 +12,8 @@ def build_prompt(transcript: str, prefix: str | None) -> str:
     if prefix: 
         return f"{prefix.strip()} {transcript}"
     return transcript
+
+
 
 def main():
     parser = argparse.ArgumentParser(
