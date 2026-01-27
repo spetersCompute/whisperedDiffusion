@@ -54,3 +54,7 @@ output/
 .python-version  # if using pyenv but want to keep machines flexible
 # Local HF cache
 cache/
+
+# Local caches
+cache/
+data/cache/
