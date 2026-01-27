@@ -1,6 +1,6 @@
 import os
 from pathlib import Path
-from src.pipeline import main as pipeline_main
+from src.pipeline import run_pipeline
 
 
 def main():
@@ -14,7 +14,11 @@ def main():
     print("[App] HF cache:", dataDir / "cache")
     print("[App] Output dir:", dataDir / "output")
 
-    pipeline_main()
+    transcript = input("say prompt text: ")
+    run_pipeline(
+        transcript=transcript,
+        out_image=str(dataDir / "output" / "output.png")
+        )
 
 
 
