@@ -38,14 +38,3 @@ def keyListener():
         elif key == "s":
             recording = False
 
-def main():
-    t = threading.Thread(target=keyListener, daemon=True)
-    t.start()
-    with sd.InputStream(callback=callback, channels=1, samplerate=SAMPLE_RATE):
-        full_audio, sample_rate = recordPrompt()
-        sf.write("prompt.wav", full_audio, SAMPLE_RATE)
-        print(full_audio.shape)
-
-
-if __name__ =="__main__":
-    main()
