@@ -3,9 +3,11 @@ import sounddevice as sd
 import numpy
 import time
 import threading
+import soundfile as sf
 
 recording = False
 chunks = []
+SAMPLE_RATE = 16000
 #full_audio = numpy.concatenate(chunks, axis = 0)
 
 def callback(indata, frames, time_info, status):
@@ -23,7 +25,7 @@ def recordPrompt():
     while recording:
         time.sleep(0.02)    
     full_audio = numpy.concatenate(chunks, axis = 0)
-    return full_audio
+    return full_audio, SAMPLE_RATE
  
 
 
@@ -39,8 +41,9 @@ def keyListener():
 def main():
     t = threading.Thread(target=keyListener, daemon=True)
     t.start()
-    with sd.InputStream(callback=callback, channels=1, samplerate=16000):
-        full_audio = recordPrompt()
+    with sd.InputStream(callback=callback, channels=1, samplerate=SAMPLE_RATE):
+        full_audio, sample_rate = recordPrompt()
+        sf.write("prompt.wav", full_audio, SAMPLE_RATE)
         print(full_audio.shape)
 
 
