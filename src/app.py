@@ -3,6 +3,7 @@ from pathlib import Path
 import threading
 import sounddevice as sd
 import soundfile as sf
+from src.whisper_client import WhisperClient
 
 from src.pipeline import run_pipeline
 from src.capture import recordPrompt, keyListener,callback, SAMPLE_RATE
@@ -25,7 +26,15 @@ def main():
         audio, samplerate = recordPrompt()
         sf.write(dataDir / "input" / "prompt.wav", audio, samplerate)
 
-    transcript = input("say prompt text: ")
+    whisper = WhisperClient(
+        model_name="base.en",
+        device="cpu",
+        compute_type="int8"
+    )
+
+    wav_path = str(dataDir / "input" / "prompt.wav")
+    transcript = whisper.transcribe(wav_path)
+
     run_pipeline(
         transcript=transcript,
         out_image=str(dataDir / "output" / "output.png"),
