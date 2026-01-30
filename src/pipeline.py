@@ -18,7 +18,7 @@ def run_pipeline(
     out_image: str = "output.png",
     device: str = "cpu",
     whisper_device: str = "cpu",
-    style_prefix: str = "A vibrant neon cyberpunk illustration of",
+    style_prefix: str = "A vibrant neon synthwave illustration of",
 ):
     print(f"[Whisper Loading model on {whisper_device}...]")
     whisper = WhisperClient(

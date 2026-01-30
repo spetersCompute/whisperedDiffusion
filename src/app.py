@@ -20,6 +20,20 @@ def main():
     print("[App] HF cache:", dataDir / "cache")
     print("[App] Output dir:", dataDir / "output")
 
+    print("""
+    Welcome to whisperedDiffusion.
+
+    A styling prefix is applied:
+    'A vibrant neon synthwave 
+     illustration of a... (your prompt)"
+     
+    Press 'r' to record your prompt
+    Press 's' to stop recording
+
+
+
+    """)
+
     t = threading.Thread(target=keyListener, daemon=True)
     t.start()
     with sd.InputStream(callback=callback, channels=1, samplerate=SAMPLE_RATE):
